@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# Node
+node_modules/
+dist/
+build/
+
+# Banco de dados
+backend/db/copa2026.db
+*.sqlite3
+
+# Variáveis de ambiente
+.env
+.env.local
+
+# Editores/OS
+.vscode/
+.idea/
+.DS_Store
+
+# Logs
+*.log
