@@ -146,26 +146,26 @@ Versão: 1.0 | Metodologia: Iterativa por Feature
 ## 🏆 SPRINT 3 — Classificação e Grupos (Estimativa: 3 dias)
 
 ### S3.1 — API de Grupos e Classificação
-- [ ] 🟡 `GET /api/grupos` — lista de todos os grupos com seleções
-- [ ] 🟡 `GET /api/grupos/:letra` — detalhe de um grupo com classificação calculada
-- [ ] 🟡 `GET /api/classificacao` — classificação de todos os grupos
-- [ ] 🟢 Serviço de cálculo de classificação: aplica pontuação + regras de desempate FIFA
+- [x] 🟡 `GET /api/grupos` — lista de todos os grupos com seleções
+- [x] 🟡 `GET /api/grupos/:letra` — detalhe de um grupo com classificação calculada
+- [x] 🟡 `GET /api/classificacao` — classificação de todos os grupos
+- [x] 🟢 Serviço de cálculo de classificação: aplica pontuação + regras de desempate FIFA (confronto direto via mini-liga; fair play não implementado — não há esse dado no schema)
 
 ### S3.2 — Visualização de Grupos
-- [ ] 🟡 Página `GruposPage`
-- [ ] 🟢 Grid de 12 grupos (A–L) em 3 ou 4 colunas
-- [ ] 🟡 Componente `TabelaGrupo`:
+- [x] 🟡 Página `GruposPage`
+- [x] 🟢 Grid de 12 grupos (A–L) em 3 ou 4 colunas
+- [x] 🟡 Componente `TabelaGrupo`:
   - Header com nome do grupo e bandeira da cabeça de chave
   - Linhas: posição, bandeira, seleção, J, V, E, D, GP, GC, SG, Pts
-  - Cores: verde (top 2), amarelo (3º em disputa), vermelho (eliminado)
+  - Cores: verde (top 2), amarelo (3º em disputa), vermelho (eliminado) — só aplicadas quando o grupo já tem os 6 jogos encerrados; senão "indefinido"
   - Badge "Cabeça de Chave" na seleção do Pote 1
-- [ ] 🟢 Tab/filtro para ver grupo específico em tela cheia
-- [ ] 🟡 Jogos do grupo abaixo da tabela (rodadas 1, 2, 3)
+- [x] 🟢 Tab/filtro para ver grupo específico em tela cheia
+- [x] 🟡 Jogos do grupo abaixo da tabela (rodadas 1, 2, 3)
 
 ### S3.3 — Seção de Potes
-- [ ] 🟢 Componente `PotesSection`
-- [ ] 🟢 4 potes com bandeiras e nomes de todas as 48 seleções
-- [ ] 🟢 Destaque visual para cabeças de chave (Pote 1)
+- [x] 🟢 Componente `PotesSection`
+- [x] 🟢 4 potes com bandeiras e nomes de todas as 48 seleções
+- [x] 🟢 Destaque visual para cabeças de chave (Pote 1)
 
 ---
 
