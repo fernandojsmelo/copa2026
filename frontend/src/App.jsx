@@ -4,6 +4,7 @@ import ErrorBoundary from './components/common/ErrorBoundary'
 import HomePage from './pages/HomePage'
 import TabelaPage from './pages/TabelaPage'
 import JogoDetalhePage from './pages/JogoDetalhePage'
+import GruposPage from './pages/GruposPage'
 import EmConstrucaoPage from './pages/EmConstrucaoPage'
 
 export default function App() {
@@ -15,7 +16,7 @@ export default function App() {
             <Route index element={<HomePage />} />
             <Route path="tabela" element={<TabelaPage />} />
             <Route path="jogos/:id" element={<JogoDetalhePage />} />
-            <Route path="grupos" element={<EmConstrucaoPage titulo="Grupos" />} />
+            <Route path="grupos" element={<GruposPage />} />
             <Route path="elencos" element={<EmConstrucaoPage titulo="Elencos" />} />
             <Route path="brasil" element={<EmConstrucaoPage titulo="Seleção Brasileira" />} />
             <Route path="bolao" element={<EmConstrucaoPage titulo="Bolão" />} />
