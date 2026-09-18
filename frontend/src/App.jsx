@@ -8,7 +8,7 @@ import GruposPage from './pages/GruposPage'
 import ElencoPage from './pages/ElencoPage'
 import SelecaoDetalhePage from './pages/SelecaoDetalhePage'
 import EscalacaoPage from './pages/EscalacaoPage'
-import EmConstrucaoPage from './pages/EmConstrucaoPage'
+import BolaoPage from './pages/BolaoPage'
 
 export default function App() {
   return (
@@ -23,7 +23,7 @@ export default function App() {
             <Route path="elencos" element={<ElencoPage />} />
             <Route path="elencos/:id" element={<SelecaoDetalhePage />} />
             <Route path="brasil" element={<EscalacaoPage />} />
-            <Route path="bolao" element={<EmConstrucaoPage titulo="Bolão" />} />
+            <Route path="bolao" element={<BolaoPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
