@@ -17,7 +17,7 @@ Versão: 1.0 | Metodologia: Iterativa por Feature
 ## 📦 SPRINT 0 — Fundação e Setup (Estimativa: 1–2 dias)
 
 ### S0.1 — Estrutura do Projeto
-- [ ] 🟢 Criar estrutura de diretórios do projeto
+- [x] 🟢 Criar estrutura de diretórios do projeto
   ```
   copa2026/
   ├── backend/
@@ -40,37 +40,37 @@ Versão: 1.0 | Metodologia: Iterativa por Feature
   ├── prd.md
   └── tasks.md
   ```
-- [ ] 🟢 Inicializar projeto (package.json / pyproject.toml)
-- [ ] 🟢 Configurar linting e formatação (ESLint/Prettier ou Black/Ruff)
-- [ ] 🟢 Criar `.gitignore` adequado
-- [ ] 🟢 README.md com instruções de setup
+- [x] 🟢 Inicializar projeto (package.json / pyproject.toml)
+- [x] 🟢 Configurar linting e formatação (ESLint/Prettier ou Black/Ruff)
+- [x] 🟢 Criar `.gitignore` adequado
+- [x] 🟢 README.md com instruções de setup
 
 ### S0.2 — Banco de Dados SQLite
-- [ ] 🟢 Criar migration `001_create_tables.sql` com todas as tabelas
-- [ ] 🟢 Criar script de inicialização do banco `db/init.py` (ou `init.js`)
-- [ ] 🟢 Criar seed `seeds/selecoes.sql` — todas as 48 seleções com grupos, potes e cabeças de chave
-- [ ] 🟢 Criar seed `seeds/jogos_fase_grupos.sql` — 48 jogos com datas, horários e estádios
-- [ ] 🟢 Criar seed `seeds/jogadores_brasil.sql` — elenco completo da Seleção Brasileira (23 jogadores)
-- [ ] 🟢 Criar seed `seeds/jogadores_outros.sql` — elencos simplificados das demais 47 seleções
-- [ ] 🟢 Script `npm run db:reset` / `make db-reset` para recriar banco do zero
-- [ ] 🟢 Script `npm run db:seed` para popular dados
-- [ ] 🟢 Verificar integridade referencial (foreign keys ativas no SQLite)
+- [x] 🟢 Criar migration `001_create_tables.sql` com todas as tabelas
+- [x] 🟢 Criar script de inicialização do banco `db/init.py` (ou `init.js`)
+- [x] 🟢 Criar seed `seeds/selecoes.sql` — todas as 48 seleções com grupos, potes e cabeças de chave
+- [x] 🟢 Criar seed `seeds/jogos_fase_grupos.sql` — jogos da fase de grupos com datas, horários e estádios (72 jogos, não 48 — ver nota no README.md)
+- [x] 🟢 Criar seed `seeds/jogadores_brasil.sql` — elenco completo da Seleção Brasileira (23 jogadores)
+- [x] 🟢 Criar seed `seeds/jogadores_outros.sql` — elencos simplificados das demais 47 seleções (placeholders, ver nota no README.md)
+- [x] 🟢 Script `npm run db:reset` / `make db-reset` para recriar banco do zero
+- [x] 🟢 Script `npm run db:seed` para popular dados
+- [x] 🟢 Verificar integridade referencial (foreign keys ativas no SQLite)
 
 ### S0.3 — Backend Base
-- [ ] 🟢 Setup do servidor (FastAPI com uvicorn / Express)
-- [ ] 🟢 Configurar CORS para desenvolvimento local
-- [ ] 🟢 Middleware de logging de requests
-- [ ] 🟢 Rota de health check: `GET /api/health`
-- [ ] 🟢 Tratamento global de erros (404, 500)
-- [ ] 🟢 Variáveis de ambiente (.env): `DB_PATH`, `PORT`, `ADMIN_PASSWORD`
+- [x] 🟢 Setup do servidor (FastAPI com uvicorn / Express)
+- [x] 🟢 Configurar CORS para desenvolvimento local
+- [x] 🟢 Middleware de logging de requests
+- [x] 🟢 Rota de health check: `GET /api/health`
+- [x] 🟢 Tratamento global de erros (404, 500)
+- [x] 🟢 Variáveis de ambiente (.env): `DB_PATH`, `PORT`, `ADMIN_KEY`
 
 ### S0.4 — Frontend Base
-- [ ] 🟢 Setup React + Vite (ou HTML/CSS/JS simples)
-- [ ] 🟢 Instalar Tailwind CSS + configurar tema personalizado (cores verde/amarelo/azul do Brasil)
-- [ ] 🟢 Criar sistema de roteamento (React Router ou páginas HTML separadas)
-- [ ] 🟢 Criar componentes base: `Header`, `Footer`, `Layout`, `Loader`, `ErrorBoundary`
-- [ ] 🟢 Importar fontes: uma display moderna + corpo legível
-- [ ] 🟢 Definir design tokens (CSS variables): cores, espaçamentos, sombras
+- [x] 🟢 Setup React + Vite (ou HTML/CSS/JS simples)
+- [x] 🟢 Instalar Tailwind CSS + configurar tema personalizado (cores verde/amarelo/azul do Brasil)
+- [x] 🟢 Criar sistema de roteamento (React Router ou páginas HTML separadas)
+- [x] 🟢 Criar componentes base: `Header`, `Footer`, `Layout`, `Loader`, `ErrorBoundary`
+- [x] 🟢 Importar fontes: uma display moderna + corpo legível
+- [x] 🟢 Definir design tokens (CSS variables): cores, espaçamentos, sombras
 
 ---
 
