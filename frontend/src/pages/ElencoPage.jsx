@@ -1,14 +1,26 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelecoes } from '../hooks/useSelecoes'
-import Loader from '../components/common/Loader'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 const GRUPOS = 'ABCDEFGHIJKL'.split('')
 
 const selectClasses =
   'rounded-lg border border-copa-border bg-copa-card px-3 py-2 text-sm text-copa-text focus:border-copa-green focus:outline-none'
 
+function SelecaoCardSkeleton() {
+  return (
+    <div className="flex flex-col items-center gap-2 rounded-xl border border-copa-border bg-copa-card p-4">
+      <div className="h-9 w-9 animate-pulse rounded-full bg-copa-border" />
+      <div className="h-3 w-16 animate-pulse rounded bg-copa-border" />
+      <div className="h-2.5 w-10 animate-pulse rounded bg-copa-border" />
+    </div>
+  )
+}
+
 export default function ElencoPage() {
+  useDocumentTitle('Elencos', 'Elencos das 48 seleções da Copa do Mundo 2026.')
+
   const { selecoes, loading } = useSelecoes()
   const [busca, setBusca] = useState('')
   const [grupo, setGrupo] = useState('')
@@ -63,7 +75,13 @@ export default function ElencoPage() {
         </select>
       </div>
 
-      {loading && <Loader label="Carregando seleções..." />}
+      {loading && (
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+          {Array.from({ length: 12 }).map((_, i) => (
+            <SelecaoCardSkeleton key={i} />
+          ))}
+        </div>
+      )}
 
       {!loading && filtradas.length === 0 && (
         <p className="text-sm text-copa-muted">Nenhuma seleção encontrada.</p>

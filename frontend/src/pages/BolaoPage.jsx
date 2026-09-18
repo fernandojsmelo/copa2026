@@ -8,6 +8,7 @@ import ProgressoBolao from '../components/bolao/ProgressoBolao'
 import SimuladorGrupos from '../components/bolao/SimuladorGrupos'
 import Chaveamento from '../components/bolao/Chaveamento'
 import Loader from '../components/common/Loader'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 const ABAS = [
   { chave: 'grupos', label: 'Fase de Grupos' },
@@ -15,6 +16,8 @@ const ABAS = [
 ]
 
 export default function BolaoPage() {
+  useDocumentTitle('Bolão', 'Monte seu bolão da Copa do Mundo 2026: palpite os jogos e simule o chaveamento até o campeão.')
+
   const { boloes, loading: loadingBoloes, bolaoAtivoId, setBolaoAtivoId, criar, duplicar, remover } = useBoloes()
   const { jogos: jogosGrupo, loading: loadingJogos } = useJogos({ fase: 'grupo', perPage: 100 })
   const palpitesApi = usePalpites(bolaoAtivoId)

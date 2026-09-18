@@ -2,12 +2,15 @@ import { useState } from 'react'
 import { useGrupos } from '../hooks/useGrupos'
 import { useJogos } from '../hooks/useJogos'
 import TabelaGrupo from '../components/grupos/TabelaGrupo'
+import TabelaGrupoSkeleton from '../components/grupos/TabelaGrupoSkeleton'
 import PotesSection from '../components/grupos/PotesSection'
-import Loader from '../components/common/Loader'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 const GRUPOS_LETRAS = 'ABCDEFGHIJKL'.split('')
 
 export default function GruposPage() {
+  useDocumentTitle('Grupos', 'Classificação dos 12 grupos da Copa do Mundo 2026, atualizada conforme os resultados.')
+
   const { grupos, loading, error } = useGrupos()
   const { jogos: jogosDaFase } = useJogos({ fase: 'grupo', perPage: 100 })
   const [grupoSelecionado, setGrupoSelecionado] = useState('')
@@ -32,7 +35,13 @@ export default function GruposPage() {
         </select>
       </div>
 
-      {loading && <Loader label="Carregando grupos..." />}
+      {loading && (
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <TabelaGrupoSkeleton key={i} />
+          ))}
+        </div>
+      )}
       {error && <p className="text-sm text-red-400">Não foi possível carregar os grupos.</p>}
 
       {!loading && !error && (

@@ -8,8 +8,11 @@ import FormacaoSelector from '../components/escalacao/FormacaoSelector'
 import ListaConvocados from '../components/escalacao/ListaConvocados'
 import EscalacoesSalvas from '../components/escalacao/EscalacoesSalvas'
 import Loader from '../components/common/Loader'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 export default function EscalacaoPage() {
+  useDocumentTitle('Escalação da Seleção Brasileira', 'Monte a escalação da Seleção Brasileira com drag & drop e salve suas formações.')
+
   const { selecoes, loading: loadingSelecoes } = useSelecoes()
   const brasilId = selecoes.find((s) => s.nome_pt === 'Brasil')?.id
   const { jogadores, loading: loadingJogadores } = useJogadores(brasilId)

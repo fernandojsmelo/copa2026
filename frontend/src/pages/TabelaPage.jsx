@@ -4,6 +4,7 @@ import { toDataLongaBrasilia } from '../utils/formatDate'
 import FiltrosJogos from '../components/jogos/FiltrosJogos'
 import JogoCard from '../components/jogos/JogoCard'
 import JogoCardSkeleton from '../components/jogos/JogoCardSkeleton'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 const PER_PAGE = 20
 
@@ -22,6 +23,8 @@ function agruparPorData(jogos) {
 }
 
 export default function TabelaPage() {
+  useDocumentTitle('Tabela de Jogos', 'Todos os 104 jogos da Copa do Mundo 2026, com filtros por fase, grupo, data e seleção.')
+
   const [filtros, setFiltros] = useState({})
   const [page, setPage] = useState(1)
 

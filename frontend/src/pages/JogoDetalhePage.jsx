@@ -4,12 +4,18 @@ import { apiGet } from '../utils/api'
 import { toDataLongaBrasilia, toHorarioBrasilia } from '../utils/formatDate'
 import { FASE_LABEL, STATUS_LABEL } from '../utils/jogos'
 import Loader from '../components/common/Loader'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 export default function JogoDetalhePage() {
   const { id } = useParams()
   const [jogo, setJogo] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+
+  useDocumentTitle(
+    jogo ? `${jogo.selecao_a.nome_pt} x ${jogo.selecao_b.nome_pt}` : 'Jogo',
+    jogo ? `${jogo.selecao_a.nome_pt} x ${jogo.selecao_b.nome_pt} — ${jogo.estadio}, ${jogo.cidade}.` : undefined,
+  )
 
   useEffect(() => {
     let cancelado = false

@@ -32,3 +32,24 @@ h3,
 .font-mono-score {
   font-family: 'JetBrains Mono', monospace;
 }
+
+@keyframes pagina-entrada {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pagina-transicao {
+  animation: pagina-entrada 0.2s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pagina-transicao {
+    animation: none;
+  }
+}

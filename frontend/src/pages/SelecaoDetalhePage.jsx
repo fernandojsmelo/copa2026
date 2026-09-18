@@ -6,12 +6,17 @@ import { useGrupos } from '../hooks/useGrupos'
 import PerfilSelecao from '../components/selecoes/PerfilSelecao'
 import TabelaElenco from '../components/selecoes/TabelaElenco'
 import Loader from '../components/common/Loader'
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 
 export default function SelecaoDetalhePage() {
   const { id } = useParams()
   const selecaoId = Number(id)
 
   const { selecao, loading, error } = useSelecao(selecaoId)
+  useDocumentTitle(
+    selecao?.nome_pt ?? 'Seleção',
+    selecao ? `Elenco e informações da seleção ${selecao.nome_pt} na Copa do Mundo 2026.` : undefined,
+  )
   const { selecoes } = useSelecoes()
   const { jogos } = useJogos({ selecaoId, perPage: 10 })
   const { grupos } = useGrupos()
