@@ -7,6 +7,7 @@ import JogoDetalhePage from './pages/JogoDetalhePage'
 import GruposPage from './pages/GruposPage'
 import ElencoPage from './pages/ElencoPage'
 import SelecaoDetalhePage from './pages/SelecaoDetalhePage'
+import EscalacaoPage from './pages/EscalacaoPage'
 import EmConstrucaoPage from './pages/EmConstrucaoPage'
 
 export default function App() {
@@ -21,7 +22,7 @@ export default function App() {
             <Route path="grupos" element={<GruposPage />} />
             <Route path="elencos" element={<ElencoPage />} />
             <Route path="elencos/:id" element={<SelecaoDetalhePage />} />
-            <Route path="brasil" element={<EmConstrucaoPage titulo="Seleção Brasileira" />} />
+            <Route path="brasil" element={<EscalacaoPage />} />
             <Route path="bolao" element={<EmConstrucaoPage titulo="Bolão" />} />
           </Route>
         </Routes>
