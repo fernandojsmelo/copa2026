@@ -197,40 +197,40 @@ Versão: 1.0 | Metodologia: Iterativa por Feature
 ## 🇧🇷 SPRINT 5 — Escalação da Seleção Brasileira (Estimativa: 4–5 dias)
 
 ### S5.1 — API de Escalação
-- [ ] 🟡 `GET /api/escalacoes` — listar escalações salvas
-- [ ] 🟡 `POST /api/escalacoes` — salvar nova escalação
-- [ ] 🟡 `PUT /api/escalacoes/:id` — atualizar escalação
-- [ ] 🟡 `DELETE /api/escalacoes/:id` — remover escalação
+- [x] 🟡 `GET /api/escalacoes` — listar escalações salvas (escopo por sessão via header `X-Session-Id`)
+- [x] 🟡 `POST /api/escalacoes` — salvar nova escalação (valida formação, duplicidade e se os jogadores pertencem ao elenco do Brasil)
+- [x] 🟡 `PUT /api/escalacoes/:id` — atualizar escalação (só o dono da sessão)
+- [x] 🟡 `DELETE /api/escalacoes/:id` — remover escalação (só o dono da sessão)
 
 ### S5.2 — Campo de Futebol Interativo
-- [ ] 🟢 Componente `CampoFutebol` (SVG ou Canvas)
-- [ ] 🟢 Campo com gramado, linhas, área, círculo central
-- [ ] 🟢 Slots de posição baseados na formação selecionada
-- [ ] 🟢 Cada slot mostra: avatar/emoji, número e nome do jogador alocado
-- [ ] 🟢 Slot vazio: círculo pulsante indicando que precisa ser preenchido
+- [x] 🟢 Componente `CampoFutebol` (SVG para as linhas + overlay HTML para os slots interativos)
+- [x] 🟢 Campo com gramado, linhas, área, círculo central
+- [x] 🟢 Slots de posição baseados na formação selecionada
+- [x] 🟢 Cada slot mostra: número e nome do jogador alocado
+- [x] 🟢 Slot vazio: círculo pulsante indicando que precisa ser preenchido
 
 ### S5.3 — Seletor de Formação
-- [ ] 🟢 Dropdown com formações: 4-3-3, 4-4-2, 4-2-3-1, 3-5-2, 5-3-2, 4-1-4-1, 3-4-3
-- [ ] 🟢 Ao mudar formação: repositicionar slots no campo, manter jogadores alocados quando possível
+- [x] 🟢 Dropdown com formações: 4-3-3, 4-4-2, 4-2-3-1, 3-5-2, 5-3-2, 4-1-4-1, 3-4-3
+- [x] 🟢 Ao mudar formação: repositicionar slots no campo, manter jogadores alocados quando possível (testado: GK/DEF preservados, quem perde o slot volta ao banco)
 
 ### S5.4 — Lista de Convocados
-- [ ] 🟡 Painel lateral com 23 convocados
-- [ ] 🟢 Filtro por posição (GK, DEF, MEI, ATA)
-- [ ] 🟢 Jogador já alocado aparece destacado (marcado)
-- [ ] 🟢 Arrastar jogador para o slot (drag & drop via HTML5 API)
-- [ ] 🟢 Clique em slot vazio abre modal de seleção (fallback mobile)
+- [x] 🟡 Painel lateral com 23 convocados
+- [x] 🟢 Filtro por posição (GK, DEF, MEI, ATA)
+- [x] 🟢 Jogador já alocado aparece destacado (marcado "titular")
+- [x] 🟢 Arrastar jogador para o slot (drag & drop via HTML5 API)
+- [x] 🟢 Fallback mobile: em vez de modal, toque no convocado arma a seleção e o toque no slot posiciona — funciona igual para trocar titulares entre si
 
 ### S5.5 — Reservas e Banco
-- [ ] 🟢 Área de banco de reservas (12 jogadores)
-- [ ] 🟢 Jogadores não titulares aparecem no banco automaticamente
-- [ ] 🟢 Troca fácil: clicar em jogador no banco + clicar em titular
+- [x] 🟢 Banco de reservas — derivado automaticamente (não é estado à parte): todo convocado que não está em nenhum slot titular
+- [x] 🟢 Jogadores não titulares aparecem no banco automaticamente
+- [x] 🟢 Troca fácil: clicar em jogador (banco ou campo) arma a seleção, clicar em um slot posiciona/troca
 
 ### S5.6 — Salvar e Compartilhar
-- [ ] 🟡 Botão "Salvar Escalação" com nome personalizado
-- [ ] 🟡 Persistência no SQLite via API
-- [ ] 🟢 Lista de escalações salvas (max 10)
-- [ ] 🟢 Botão "Exportar como imagem" (html2canvas)
-- [ ] 🟢 Validação: alerta se campo incompleto (faltam titulares)
+- [x] 🟡 Botão "Salvar Escalação" com nome personalizado
+- [x] 🟡 Persistência no SQLite via API
+- [x] 🟢 Lista de escalações salvas (máx. 10, reforçado no backend)
+- [x] 🟢 Botão "Exportar como imagem" (html2canvas, testado e confere)
+- [x] 🟢 Validação: botão "Salvar" fica desabilitado até os 11 titulares estarem definidos, com contador "X/11" visível
 
 ---
 
