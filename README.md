@@ -74,7 +74,7 @@ frontend/   React + Vite + Tailwind CSS
 ## Status
 
 - [x] Sprint 0 — Fundação e Setup
-- [ ] Sprint 1 — Landing Page
+- [x] Sprint 1 — Landing Page
 - [ ] Sprint 2 — Tabela de Jogos
 - [ ] Sprint 3 — Classificação e Grupos
 - [ ] Sprint 4 — Elencos das Seleções

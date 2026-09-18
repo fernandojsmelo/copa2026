@@ -77,36 +77,36 @@ Versão: 1.0 | Metodologia: Iterativa por Feature
 ## 🏠 SPRINT 1 — Landing Page (Estimativa: 2–3 dias)
 
 ### S1.1 — Hero Section
-- [ ] 🟢 Criar componente `HeroSection`
-- [ ] 🟢 Background visual temático Copa 2026 (gradiente, textura ou imagem)
-- [ ] 🟢 Logo/título do app
-- [ ] 🟢 Tagline e chamada para ação
+- [x] 🟢 Criar componente `HeroSection`
+- [x] 🟢 Background visual temático Copa 2026 (gradiente, textura ou imagem)
+- [x] 🟢 Logo/título do app
+- [x] 🟢 Tagline e chamada para ação
 
 ### S1.2 — Countdown Regressivo
-- [ ] 🟢 Criar componente `Countdown`
-- [ ] 🟢 Data alvo: 11/06/2026 às 17h00 (horário de Brasília, GMT-3)
-- [ ] 🟢 Exibir: DIAS / HORAS / MINUTOS / SEGUNDOS com animação de flip ou pulse
-- [ ] 🟢 `setInterval` atualizando a cada 1 segundo
-- [ ] 🟢 Mensagem pós-Copa: "A Copa começou!" quando countdown zera
-- [ ] 🟢 Responsivo: layout empilhado em mobile
+- [x] 🟢 Criar componente `Countdown`
+- [x] 🟢 Data alvo: 11/06/2026 às 17h00 (horário de Brasília, GMT-3)
+- [x] 🟢 Exibir: DIAS / HORAS / MINUTOS / SEGUNDOS com animação de flip ou pulse
+- [x] 🟢 `setInterval` atualizando a cada 1 segundo
+- [x] 🟢 Mensagem pós-Copa: "A Copa começou!" quando countdown zera
+- [x] 🟢 Responsivo: layout empilhado em mobile
 
 ### S1.3 — Próximos Jogos (widget)
-- [ ] 🟡 (depende S0.2) Criar API: `GET /api/jogos?limit=5&status=agendado`
-- [ ] 🟢 Componente `ProximosJogos` com scroll horizontal em mobile
-- [ ] 🟢 Card de jogo: bandeiras, horário (brasília), estádio
+- [x] 🟡 (depende S0.2) Criar API: `GET /api/jogos?limit=5&status=agendado`
+- [x] 🟢 Componente `ProximosJogos` com scroll horizontal em mobile
+- [x] 🟢 Card de jogo: bandeiras, horário (brasília), estádio
 
 ### S1.4 — Últimos Resultados (widget)
-- [ ] 🟡 Criar API: `GET /api/jogos?status=encerrado&limit=5`
-- [ ] 🟢 Componente `UltimosResultados` com placar final
+- [x] 🟡 Criar API: `GET /api/jogos?status=encerrado&limit=5`
+- [x] 🟢 Componente `UltimosResultados` com placar final
 
 ### S1.5 — Stats da Copa
-- [ ] 🟢 Seção com cards estáticos: 48 seleções, 104 jogos, 16 cidades, 3 países-sede
-- [ ] 🟢 Animação de count-up nos números ao entrar na viewport
+- [x] 🟢 Seção com cards estáticos: 48 seleções, 104 jogos, 16 cidades, 3 países-sede
+- [x] 🟢 Animação de count-up nos números ao entrar na viewport
 
 ### S1.6 — Navegação Principal
-- [ ] 🟢 Navbar fixa com links: Tabela | Grupos | Elencos | Brasil | Bolão
-- [ ] 🟢 Menu hamburger mobile
-- [ ] 🟢 Indicador de página ativa
+- [x] 🟢 Navbar fixa com links: Tabela | Grupos | Elencos | Brasil | Bolão
+- [x] 🟢 Menu hamburger mobile
+- [x] 🟢 Indicador de página ativa
 
 ---
 
