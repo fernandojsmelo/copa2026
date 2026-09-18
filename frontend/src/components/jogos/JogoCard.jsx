@@ -1,10 +1,6 @@
+import { Link } from 'react-router-dom'
 import { toHorarioBrasilia } from '../../utils/formatDate'
-
-const STATUS_LABEL = {
-  agendado: 'Agendado',
-  em_andamento: 'Ao vivo',
-  encerrado: 'Encerrado',
-}
+import { STATUS_LABEL, FASE_LABEL } from '../../utils/jogos'
 
 const STATUS_CLASSES = {
   agendado: 'bg-gray-700 text-gray-300',
@@ -25,10 +21,19 @@ export default function JogoCard({ jogo }) {
   const temPlacar = jogo.gols_a !== null && jogo.gols_b !== null
 
   return (
-    <div className="flex min-w-[260px] flex-col gap-3 rounded-xl border border-copa-border bg-copa-card p-4">
-      <div className="flex items-center justify-between text-xs text-copa-muted">
-        <span>{toHorarioBrasilia(jogo.data_hora_utc)}</span>
-        <span className={`rounded-full px-2 py-0.5 font-medium ${STATUS_CLASSES[jogo.status]}`}>
+    <Link
+      to={`/jogos/${jogo.id}`}
+      className="flex min-w-[260px] flex-col gap-3 rounded-xl border border-copa-border bg-copa-card p-4 transition-colors hover:border-copa-green"
+    >
+      <div className="flex items-start justify-between gap-2 text-xs text-copa-muted">
+        <div className="flex flex-col gap-0.5">
+          <span>
+            {FASE_LABEL[jogo.fase]}
+            {jogo.grupo ? ` · Grupo ${jogo.grupo}` : ''}
+          </span>
+          <span>{toHorarioBrasilia(jogo.data_hora_utc)}</span>
+        </div>
+        <span className={`shrink-0 rounded-full px-2 py-0.5 font-medium ${STATUS_CLASSES[jogo.status]}`}>
           {STATUS_LABEL[jogo.status]}
         </span>
       </div>
@@ -44,6 +49,6 @@ export default function JogoCard({ jogo }) {
       <p className="truncate text-xs text-copa-muted">
         {jogo.estadio} · {jogo.cidade}
       </p>
-    </div>
+    </Link>
   )
 }

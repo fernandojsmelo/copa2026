@@ -3,7 +3,7 @@ import JogoCard from '../jogos/JogoCard'
 import Loader from '../common/Loader'
 
 export default function UltimosResultados() {
-  const { jogos, loading, error } = useJogos({ status: 'encerrado', limit: 5 })
+  const { jogos, loading, error } = useJogos({ status: 'encerrado', order: 'desc', perPage: 5 })
 
   return (
     <section className="py-8">

@@ -11,10 +11,13 @@ export function toHorarioBrasilia(utcString) {
 
 export function toDataLongaBrasilia(utcString) {
   const date = new Date(utcString.endsWith('Z') ? utcString : `${utcString}Z`)
-  return date.toLocaleString('pt-BR', {
+  const texto = date.toLocaleString('pt-BR', {
     timeZone: 'America/Sao_Paulo',
     weekday: 'long',
     day: '2-digit',
     month: 'long',
   })
+  // toLocaleString devolve tudo em minúsculas ("quinta-feira, 11 de junho");
+  // maiusculamos só a primeira letra (Tailwind `capitalize` maiusculiza cada palavra, errado em PT-BR)
+  return texto.charAt(0).toUpperCase() + texto.slice(1)
 }

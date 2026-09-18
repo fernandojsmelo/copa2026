@@ -3,7 +3,7 @@ import JogoCard from '../jogos/JogoCard'
 import Loader from '../common/Loader'
 
 export default function ProximosJogos() {
-  const { jogos, loading, error } = useJogos({ status: 'agendado', limit: 5 })
+  const { jogos, loading, error } = useJogos({ status: 'agendado', perPage: 5 })
 
   return (
     <section className="py-8">
