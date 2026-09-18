@@ -32,6 +32,13 @@ make dev-frontend   # http://localhost:5173
 
 A documentação interativa da API fica em `http://localhost:8000/docs`.
 
+## Painel administrativo
+
+Acesse `http://localhost:5173/admin` (sem link na navegação pública) e use o
+valor de `ADMIN_KEY` do `backend/.env` como senha — por padrão, em
+desenvolvimento, `troque-esta-chave` (definido em `backend/.env.example`).
+Permite atualizar placar/status dos jogos e editar os elencos.
+
 ## Banco de dados
 
 O banco é um arquivo SQLite único (`backend/db/copa2026.db`), sem Docker e sem
@@ -104,7 +111,7 @@ frontend/   React + Vite + Tailwind CSS
 - [x] Sprint 4 — Elencos das Seleções
 - [x] Sprint 5 — Escalação da Seleção Brasileira
 - [x] Sprint 6 — Bolão e Simulador de Chaveamento
-- [ ] Sprint 7 — Painel Admin e Polimento
+- [x] Sprint 7 — Painel Admin e Polimento
 - [ ] Sprint 8 — Testes e Deploy
 
 Detalhamento completo em [Tasks.md](Tasks.md).

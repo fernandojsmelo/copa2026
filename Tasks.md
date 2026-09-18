@@ -283,25 +283,25 @@ Versão: 1.0 | Metodologia: Iterativa por Feature
 ## ⚙️ SPRINT 7 — Painel Admin e Polimento (Estimativa: 2–3 dias)
 
 ### S7.1 — Painel Administrativo
-- [ ] 🟢 Rota protegida `/admin` com senha simples
-- [ ] 🟡 Lista de jogos com status e placar atuais
-- [ ] 🟡 Formulário para atualizar placar de jogo
-- [ ] 🟡 Toggle de status: Agendado → Em andamento → Encerrado
-- [ ] 🟡 Atualização de elencos (adicionar/remover jogadores)
+- [x] 🟢 Rota protegida `/admin` com senha simples (login via `POST /api/admin/login`, chave guardada em `sessionStorage`, reenviada como `X-Admin-Key`)
+- [x] 🟡 Lista de jogos com status e placar atuais
+- [x] 🟡 Formulário para atualizar placar de jogo
+- [x] 🟡 Alternar status via dropdown (Agendado / Em andamento / Encerrado)
+- [x] 🟡 Atualização de elencos (adicionar/editar/remover jogadores) — novas rotas `POST`/`PUT`/`DELETE /api/admin/jogadores`
 
 ### S7.2 — Melhorias de UX
-- [ ] 🟢 Toasts de feedback em todas as ações (salvar, erro, sucesso)
-- [ ] 🟢 Skeleton loaders em todas as listas
-- [ ] 🟢 Tratamento de erro de rede (retry automático)
-- [ ] 🟢 Modo escuro / claro (toggle)
-- [ ] 🟢 Animações de transição entre páginas
-- [ ] 🟢 Scroll to top ao navegar
+- [x] 🟢 Toasts de feedback nas ações do painel admin (salvar jogo, salvar/adicionar/remover jogador, erros); o restante do app já tinha padrão próprio de feedback inline (ex.: mensagem "Escalação salva!" na S5, "Salvo"/"Salvando..." no bolão na S6) — não convertido para toast para não regredir esses fluxos já testados
+- [x] 🟢 Skeleton loaders nas listagens mais visíveis (Tabela de Jogos, Grupos, Elencos); Bolão e Escalação mantêm o spinner (`Loader`) que já tinham
+- [x] 🟢 Tratamento de erro de rede: retry automático (2 tentativas, 500ms) só em GET — reexecutar POST/PUT/DELETE sozinho arriscaria duplicar efeitos colaterais
+- [ ] 🟢 Modo escuro / claro — **decisão do usuário: não implementar**. O Claude.md define um sistema de design fixo e só escuro, sem paleta clara especificada; inventar uma paleta nova unilateralmente fugiria do que foi definido
+- [x] 🟢 Animações de transição entre páginas (fade + leve deslocamento, respeitando `prefers-reduced-motion`)
+- [x] 🟢 Scroll to top ao navegar
 
 ### S7.3 — SEO e Performance
-- [ ] 🟢 Meta tags (title, description, og:image por página)
-- [ ] 🟢 Favicon temático Copa 2026
-- [ ] 🟢 Lazy loading de imagens/bandeiras
-- [ ] 🟢 Compressão de assets
+- [x] 🟢 Meta tags: title e description dinâmicos por página (hook `useDocumentTitle`); `og:title`/`og:description` ficam estáticos no nível do app (`index.html`) — não implementados por página. Sem `og:image`: não há uma imagem de capa gerada/hospedada para o projeto
+- [x] 🟢 Favicon temático Copa 2026 (bola de futebol em SVG, cores da marca)
+- [x] 🟢 Lazy loading de imagens/bandeiras — **não aplicável**: bandeiras são emoji (texto), não `<img>`, decisão já tomada no Sprint 0
+- [x] 🟢 Compressão de assets — o build de produção do Vite já minifica JS/CSS (ver `npm run build`); compressão HTTP (gzip/brotli) é responsabilidade do servidor em produção, fica para o Sprint 8 (Deploy)
 
 ---
 
