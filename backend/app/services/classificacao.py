@@ -8,6 +8,10 @@ Critérios em ordem (RN-01 do PRD.md):
 5. Ranking FIFA (fallback final, quando disponível)
 
 Fair play (cartões) não é aplicado — não há esse dado no schema (v1).
+
+A lógica pura (`calcular_classificacao_de_resultados`) não acessa o banco —
+é reaproveitada tanto pela classificação real (grupos com jogos encerrados)
+quanto pela simulação do bolão (grupos com base nos palpites do usuário).
 """
 import sqlite3
 
@@ -18,9 +22,9 @@ def _stats_vazias():
     return {"jogos": 0, "vitorias": 0, "empates": 0, "derrotas": 0, "gols_pro": 0, "gols_contra": 0}
 
 
-def _computar_stats(selecao_ids: set[int], jogos_encerrados: list[dict]) -> dict[int, dict]:
+def _computar_stats(selecao_ids: set[int], resultados: list[dict]) -> dict[int, dict]:
     stats = {sid: _stats_vazias() for sid in selecao_ids}
-    for jogo in jogos_encerrados:
+    for jogo in resultados:
         a, b = jogo["selecao_a_id"], jogo["selecao_b_id"]
         if a not in selecao_ids or b not in selecao_ids:
             continue
@@ -50,10 +54,10 @@ def _chave_criterios_gerais(stats: dict) -> tuple:
     return (-stats["pontos"], -stats["saldo_gols"], -stats["gols_pro"])
 
 
-def _desempatar_confronto_direto(selecoes: list[dict], stats_gerais: dict, jogos_encerrados: list[dict]) -> list[dict]:
+def _desempatar_confronto_direto(selecoes: list[dict], resultados: list[dict]) -> list[dict]:
     """Reordena um cluster empatado usando uma mini-liga só com os jogos entre eles."""
     ids = {s["id"] for s in selecoes}
-    stats_mini = _computar_stats(ids, jogos_encerrados)
+    stats_mini = _computar_stats(ids, resultados)
 
     def chave(selecao):
         mini = stats_mini[selecao["id"]]
@@ -63,37 +67,19 @@ def _desempatar_confronto_direto(selecoes: list[dict], stats_gerais: dict, jogos
     return sorted(selecoes, key=chave)
 
 
-def calcular_classificacao(db: sqlite3.Connection, grupo: str) -> list[dict]:
-    selecoes = [
-        dict(row)
-        for row in db.execute(
-            """
-            SELECT id, nome_pt, codigo_iso, bandeira_emoji, pote, eh_cabeca_chave, ranking_fifa
-            FROM selecoes
-            WHERE grupo = ?
-            ORDER BY pote
-            """,
-            (grupo,),
-        ).fetchall()
-    ]
+def calcular_classificacao_de_resultados(
+    selecoes: list[dict], resultados: list[dict], total_jogos_grupo: int = JOGOS_POR_GRUPO
+) -> list[dict]:
+    """Calcula a tabela de um grupo a partir de uma lista de seleções e resultados.
+
+    `selecoes`: [{id, nome_pt, codigo_iso, bandeira_emoji, eh_cabeca_chave, ranking_fifa}, ...]
+    `resultados`: [{selecao_a_id, selecao_b_id, gols_a, gols_b}, ...] (só jogos já decididos)
+    """
     if not selecoes:
         return []
 
     ids = {s["id"] for s in selecoes}
-    jogos_encerrados = [
-        dict(row)
-        for row in db.execute(
-            """
-            SELECT selecao_a_id, selecao_b_id, gols_a, gols_b
-            FROM jogos
-            WHERE grupo = ? AND fase = 'grupo' AND status = 'encerrado'
-              AND gols_a IS NOT NULL AND gols_b IS NOT NULL
-            """,
-            (grupo,),
-        ).fetchall()
-    ]
-
-    stats_gerais = _computar_stats(ids, jogos_encerrados)
+    stats_gerais = _computar_stats(ids, resultados)
 
     ordenados = sorted(selecoes, key=lambda s: _chave_criterios_gerais(stats_gerais[s["id"]]))
 
@@ -108,12 +94,11 @@ def calcular_classificacao(db: sqlite3.Connection, grupo: str) -> list[dict]:
             j += 1
         cluster = ordenados[i:j]
         if len(cluster) > 1:
-            cluster = _desempatar_confronto_direto(cluster, stats_gerais, jogos_encerrados)
+            cluster = _desempatar_confronto_direto(cluster, resultados)
         resultado.extend(cluster)
         i = j
 
-    total_encerrados = len(jogos_encerrados)
-    grupo_completo = total_encerrados == JOGOS_POR_GRUPO
+    grupo_completo = len(resultados) == total_jogos_grupo
 
     linhas = []
     for posicao, selecao in enumerate(resultado, start=1):
@@ -131,6 +116,7 @@ def calcular_classificacao(db: sqlite3.Connection, grupo: str) -> list[dict]:
                     "codigo_iso": selecao["codigo_iso"],
                     "bandeira_emoji": selecao["bandeira_emoji"],
                     "eh_cabeca_chave": bool(selecao["eh_cabeca_chave"]),
+                    "ranking_fifa": selecao.get("ranking_fifa"),
                 },
                 "pontos": st["pontos"],
                 "jogos": st["jogos"],
@@ -144,3 +130,31 @@ def calcular_classificacao(db: sqlite3.Connection, grupo: str) -> list[dict]:
             }
         )
     return linhas
+
+
+def calcular_classificacao(db: sqlite3.Connection, grupo: str) -> list[dict]:
+    selecoes = [
+        dict(row)
+        for row in db.execute(
+            """
+            SELECT id, nome_pt, codigo_iso, bandeira_emoji, pote, eh_cabeca_chave, ranking_fifa
+            FROM selecoes
+            WHERE grupo = ?
+            ORDER BY pote
+            """,
+            (grupo,),
+        ).fetchall()
+    ]
+    resultados = [
+        dict(row)
+        for row in db.execute(
+            """
+            SELECT selecao_a_id, selecao_b_id, gols_a, gols_b
+            FROM jogos
+            WHERE grupo = ? AND fase = 'grupo' AND status = 'encerrado'
+              AND gols_a IS NOT NULL AND gols_b IS NOT NULL
+            """,
+            (grupo,),
+        ).fetchall()
+    ]
+    return calcular_classificacao_de_resultados(selecoes, resultados)

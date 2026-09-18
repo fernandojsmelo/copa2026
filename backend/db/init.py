@@ -38,15 +38,44 @@ def executar_sql_file(conn: sqlite3.Connection, path: Path) -> None:
 
 
 def rodar_migrations(conn: sqlite3.Connection) -> None:
+    # Bookkeeping de migrations já aplicadas: necessário porque migrations que
+    # recriam uma tabela (ex: 002, para adicionar uma coluna) não são seguras
+    # de rodar duas vezes — rodar de novo perderia dados da coluna nova.
+    conn.execute(
+        "CREATE TABLE IF NOT EXISTS _schema_migrations (nome TEXT PRIMARY KEY, aplicada_em TEXT DEFAULT (datetime('now')))"
+    )
+    aplicadas = {row[0] for row in conn.execute("SELECT nome FROM _schema_migrations")}
+
     for path in sorted(MIGRATIONS_DIR.glob("*.sql")):
+        if path.name in aplicadas:
+            continue
         print(f"  migration: {path.name}")
         executar_sql_file(conn, path)
+        conn.execute("INSERT INTO _schema_migrations (nome) VALUES (?)", (path.name,))
+        conn.commit()
 
 
-def rodar_seeds(conn: sqlite3.Connection) -> None:
+def rodar_seeds(conn: sqlite3.Connection, forcar: bool = False) -> None:
+    # Mesmo raciocínio das migrations: sem bookkeeping, rodar `python db/init.py`
+    # de novo sem --reset duplicava todos os dados (INSERT sem checar o que já
+    # existe). Em --seed-only os dados já foram limpos por limpar_dados(), então
+    # os seeds sempre rodam de novo ali (forcar=True) e o registro é atualizado.
+    conn.execute(
+        "CREATE TABLE IF NOT EXISTS _schema_migrations (nome TEXT PRIMARY KEY, aplicada_em TEXT DEFAULT (datetime('now')))"
+    )
+    aplicados = {row[0] for row in conn.execute("SELECT nome FROM _schema_migrations WHERE nome LIKE 'seed:%'")}
+
     for path in sorted(SEEDS_DIR.glob("*.sql")):
+        chave = f"seed:{path.name}"
+        if not forcar and chave in aplicados:
+            continue
         print(f"  seed: {path.name}")
         executar_sql_file(conn, path)
+        conn.execute(
+            "INSERT INTO _schema_migrations (nome) VALUES (?) ON CONFLICT(nome) DO UPDATE SET aplicada_em = datetime('now')",
+            (chave,),
+        )
+        conn.commit()
 
 
 def limpar_dados(conn: sqlite3.Connection) -> None:
@@ -82,7 +111,7 @@ def main() -> None:
             rodar_migrations(conn)
 
         print("Rodando seeds...")
-        rodar_seeds(conn)
+        rodar_seeds(conn, forcar=args.seed_only)
         conn.commit()
     finally:
         conn.close()
