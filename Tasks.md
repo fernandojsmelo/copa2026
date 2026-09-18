@@ -113,33 +113,33 @@ Versão: 1.0 | Metodologia: Iterativa por Feature
 ## 📅 SPRINT 2 — Tabela de Jogos (Estimativa: 3 dias)
 
 ### S2.1 — API de Jogos
-- [ ] 🟡 `GET /api/jogos` — lista paginada com filtros:
-  - `?fase=grupos|oitavas|quartas|semi|terceiro|final`
+- [x] 🟡 `GET /api/jogos` — lista paginada com filtros:
+  - `?fase=grupo|oitavas|quartas|semi|terceiro|final` (schema usa `grupo`, singular — Tasks.md original dizia `grupos`)
   - `?grupo=A|B|...|L`
   - `?selecao_id=:id`
-  - `?data=YYYY-MM-DD`
+  - `?data=YYYY-MM-DD` (data civil em horário de Brasília)
   - `?status=agendado|em_andamento|encerrado`
-- [ ] 🟡 `GET /api/jogos/:id` — detalhe de um jogo
-- [ ] 🟡 `PATCH /api/admin/jogos/:id` — atualizar placar (autenticado)
+- [x] 🟡 `GET /api/jogos/:id` — detalhe de um jogo
+- [x] 🟡 `PATCH /api/admin/jogos/:id` — atualizar placar (autenticado via header `X-Admin-Key`)
 
 ### S2.2 — Componente de Tabela
-- [ ] 🟡 Página `TabelaPage`
-- [ ] 🟢 Barra de filtros: fase, grupo, data, seleção
-- [ ] 🟢 Agrupamento visual por data (ex: "Terça, 11 de junho")
-- [ ] 🟡 Componente `JogoCard`:
+- [x] 🟡 Página `TabelaPage`
+- [x] 🟢 Barra de filtros: fase, grupo, data, seleção
+- [x] 🟢 Agrupamento visual por data (ex: "Terça, 11 de junho")
+- [x] 🟡 Componente `JogoCard`:
   - Bandeiras e nomes das seleções
   - Horário (brasília)
   - Placar (ou "-" se não iniciado)
   - Estádio e cidade
   - Badge de status (Agendado / Ao vivo / Encerrado)
   - Fase e grupo
-- [ ] 🟢 Loading skeleton durante fetch
-- [ ] 🟢 Estado vazio: "Nenhum jogo encontrado para esse filtro"
+- [x] 🟢 Loading skeleton durante fetch
+- [x] 🟢 Estado vazio: "Nenhum jogo encontrado para esse filtro"
 
 ### S2.3 — Detalhes do Jogo
-- [ ] 🟡 Modal/página de detalhe do jogo
-- [ ] 🟢 Informações completas: data, horário, sede, árbitro (se disponível)
-- [ ] 🟢 Mini-tabela do grupo ao qual pertence o jogo
+- [x] 🟡 Página de detalhe do jogo (`/jogos/:id`)
+- [x] 🟢 Informações completas: data, horário, sede (árbitro não consta no schema/PRD, não há dado a exibir)
+- [ ] 🟢 Mini-tabela do grupo ao qual pertence o jogo — depende do serviço de cálculo de classificação (Sprint 3, S3.1)
 
 ---
 
