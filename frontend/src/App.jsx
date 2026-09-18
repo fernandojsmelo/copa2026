@@ -9,6 +9,7 @@ import ElencoPage from './pages/ElencoPage'
 import SelecaoDetalhePage from './pages/SelecaoDetalhePage'
 import EscalacaoPage from './pages/EscalacaoPage'
 import BolaoPage from './pages/BolaoPage'
+import AdminPage from './pages/AdminPage'
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
             <Route path="elencos/:id" element={<SelecaoDetalhePage />} />
             <Route path="brasil" element={<EscalacaoPage />} />
             <Route path="bolao" element={<BolaoPage />} />
+            <Route path="admin" element={<AdminPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
