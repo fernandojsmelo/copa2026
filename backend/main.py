@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app.config import CORS_ORIGINS
-from app.routes import admin, health, jogos, selecoes
+from app.routes import admin, grupos, health, jogos, selecoes
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger("copa2026")
@@ -45,4 +45,5 @@ async def internal_error_handler(request: Request, exc):
 app.include_router(health.router, prefix="/api")
 app.include_router(jogos.router, prefix="/api")
 app.include_router(selecoes.router, prefix="/api")
+app.include_router(grupos.router, prefix="/api")
 app.include_router(admin.router, prefix="/api")

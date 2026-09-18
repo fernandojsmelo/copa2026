@@ -18,9 +18,10 @@ GRUPOS_VALIDOS = set("ABCDEFGHIJKL")
 @router.get("/selecoes")
 def listar_selecoes(
     grupo: str | None = Query(default=None),
+    incluir_pendentes: bool = Query(default=False, description="Inclui vagas 'A Definir' (repescagem)"),
     db: sqlite3.Connection = Depends(get_db_dependency),
 ):
-    condicoes = ["codigo_iso != 'TBD'"]
+    condicoes = [] if incluir_pendentes else ["codigo_iso != 'TBD'"]
     parametros: list = []
 
     if grupo:
@@ -29,7 +30,7 @@ def listar_selecoes(
             condicoes.append("grupo = ?")
             parametros.append(grupo)
 
-    where = f"WHERE {' AND '.join(condicoes)}"
+    where = f"WHERE {' AND '.join(condicoes)}" if condicoes else ""
     rows = db.execute(
         f"""
         SELECT id, nome_pt, codigo_iso, bandeira_emoji, grupo, pote, eh_cabeca_chave
