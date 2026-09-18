@@ -308,18 +308,18 @@ Versão: 1.0 | Metodologia: Iterativa por Feature
 ## 🧪 SPRINT 8 — Testes e Deploy (Estimativa: 2 dias)
 
 ### S8.1 — Testes
-- [ ] 🟢 Testar todos os 12 grupos com classificação manual
-- [ ] 🟢 Testar simulação completa de bolão (grupos → final)
-- [ ] 🟢 Testar escalação com todas as 7 formações
-- [ ] 🟢 Testar em mobile (iOS Safari, Chrome Android)
-- [ ] 🟢 Testar countdown nos últimos segundos
+- [x] 🟢 Testar classificação manual: Grupo A (Sprint 3, cenário completo) e Grupo B (Sprint 8, desempate por confronto direto construído propositalmente) via placares reais no painel admin; os outros 10 grupos foram exercitados simultaneamente pela simulação completa do bolão (abaixo), com o mesmo motor de cálculo
+- [x] 🟢 Testar simulação completa de bolão (grupos → final) — via script E2E na API e via UI real, cascateando até o campeão
+- [x] 🟢 Testar escalação com todas as 7 formações — confirmados 11 slots corretamente posicionados em cada uma
+- [x] 🟢 Testar em mobile — viewport 375×812 via Chromium (Playwright) em todas as páginas; **não é** o mesmo que testar em iOS Safari/Chrome Android reais, que não há como acessar neste ambiente (nota também no README.md)
+- [x] 🟢 Testar countdown nos últimos segundos — data-alvo alterada temporariamente, contagem confirmada até zero e transição para "A Copa começou!"
 
 ### S8.2 — Deploy
-- [ ] 🟢 Build de produção do frontend
-- [ ] 🟢 Configurar servidor (local ou VPS)
-- [ ] 🟢 Backup automático do SQLite (script cron)
-- [ ] 🟢 Variáveis de ambiente de produção
-- [ ] 🟢 Documentação de deploy no README
+- [x] 🟢 Build de produção do frontend (`make build-frontend`)
+- [x] 🟢 Configurar servidor (local ou VPS) — templates em `deploy/` (systemd + nginx) e guia no README.md; por decisão do usuário, não publicado em nenhum servidor real
+- [x] 🟢 Backup automático do SQLite (`backend/scripts/backup_db.py` + exemplo de cron) — testado: backup gerado, restaurado e dados conferidos íntegros
+- [x] 🟢 Variáveis de ambiente de produção (`backend/.env.production.example`)
+- [x] 🟢 Documentação de deploy no README.md
 
 ---
 
