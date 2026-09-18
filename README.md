@@ -71,6 +71,30 @@ frontend/   React + Vite + Tailwind CSS
   placeholder (`"Jogador N (COD)"`) até que elencos oficiais sejam divulgados —
   evita atribuir nomes de atletas reais sem fonte confirmada.
 
+## Notas sobre o simulador de bolão
+
+- **`palpites.jogo_id` virou opcional** (migration `002_palpites_chave_virtual.sql`):
+  os confrontos do mata-mata no simulador são hipotéticos — dependem de quem
+  cada usuário simulou como classificado na fase de grupos, então dois bolões
+  podem ter "o vencedor do Grupo A" diferente. Não dá pra referenciar uma linha
+  `jogos` real e compartilhada nesse caso. A nova coluna `chave_slot` (ex.:
+  `"oitavas-1"`, `"final"`) identifica o confronto virtual quando `jogo_id` é
+  `NULL`.
+- **Chaveamento das oitavas é um algoritmo próprio**, não a tabela oficial da
+  FIFA: as fontes do projeto (PRD.md/Claude.md) não trazem essa tabela, só
+  dizem que ela "deve estar hardcoded" sem fornecer os dados — inventar um
+  cruzamento e apresentá-lo como oficial arriscaria informação incorreta. O
+  algoritmo (documentado em `backend/app/services/chaveamento.py`) pareia o
+  1º de cada grupo com o 2º do grupo seguinte, e semeia os 8 melhores
+  terceiros entre si (1º×8º, 2º×7º...).
+- **`db/init.py` agora rastreia migrations e seeds já aplicados** (tabela
+  `_schema_migrations`): antes, rodar `python db/init.py` sem `--reset`
+  duplicava todos os dados a cada execução (os seeds eram sempre
+  reinseridos). Isso já existia desde o Sprint 0 e só foi notado agora, ao
+  precisar de uma migration que recria uma tabela (`002`, para tornar
+  `jogo_id` opcional) — rodar essa migration duas vezes teria apagado a
+  coluna nova.
+
 ## Status
 
 - [x] Sprint 0 — Fundação e Setup
@@ -79,7 +103,7 @@ frontend/   React + Vite + Tailwind CSS
 - [x] Sprint 3 — Classificação e Grupos
 - [x] Sprint 4 — Elencos das Seleções
 - [x] Sprint 5 — Escalação da Seleção Brasileira
-- [ ] Sprint 6 — Bolão e Simulador de Chaveamento
+- [x] Sprint 6 — Bolão e Simulador de Chaveamento
 - [ ] Sprint 7 — Painel Admin e Polimento
 - [ ] Sprint 8 — Testes e Deploy
 

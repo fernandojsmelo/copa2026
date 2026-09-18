@@ -237,45 +237,46 @@ Versão: 1.0 | Metodologia: Iterativa por Feature
 ## 🎯 SPRINT 6 — Bolão e Simulador de Chaveamento (Estimativa: 5–6 dias)
 
 ### S6.1 — API de Bolão
-- [ ] 🟡 `GET /api/boloes` — listar bolões da sessão
-- [ ] 🟡 `POST /api/boloes` — criar bolão
-- [ ] 🟡 `GET /api/boloes/:id/palpites` — palpites de um bolão
-- [ ] 🟡 `POST /api/boloes/:id/palpites` — salvar/atualizar palpite
-- [ ] 🟡 `GET /api/boloes/:id/chaveamento` — chaveamento calculado com base nos palpites
-- [ ] 🟡 `DELETE /api/boloes/:id` — remover bolão
+- [x] 🟡 `GET /api/boloes` — listar bolões da sessão
+- [x] 🟡 `POST /api/boloes` — criar bolão
+- [x] 🟡 `GET /api/boloes/:id/palpites` — palpites de um bolão
+- [x] 🟡 `POST /api/boloes/:id/palpites` — salvar/atualizar palpite (grupo via `jogo_id` ou mata-mata via `chave_slot` virtual — ver nota no README.md sobre a migration 002)
+- [x] 🟡 `GET /api/boloes/:id/chaveamento` — chaveamento calculado com base nos palpites
+- [x] 🟡 `DELETE /api/boloes/:id` — remover bolão
+- [x] 🟢 (extra, necessário para S6.4) `POST /api/boloes/:id/duplicar`
 
 ### S6.2 — Simulador de Fase de Grupos
-- [ ] 🟡 Página `BolaoPage`
-- [ ] 🟢 Wizard em abas: "Grupos" → "Oitavas" → "Quartas" → "Semis" → "Final"
-- [ ] 🟡 Para cada jogo da fase de grupos:
+- [x] 🟡 Página `BolaoPage`
+- [x] 🟢 Abas: "Fase de Grupos" e "Mata-Mata" — 2 abas em vez de 5 ("Grupos"/"Oitavas"/"Quartas"/"Semis"/"Final"); o Mata-Mata mostra o chaveamento completo com scroll horizontal em vez de fragmentar em 4 abas quase vazias
+- [x] 🟡 Para cada jogo da fase de grupos:
   - Bandeiras e nomes das seleções
   - Input de placar (0–20, steppers +/-)
   - Botão de empate rápido
-- [ ] 🟡 Classificação em tempo real ao lado (atualiza conforme palpites)
-- [ ] 🟡 Serviço de cálculo: `calcularClassificacaoGrupos(palpites)` → classificados
-- [ ] 🟡 Seleção dos 8 melhores terceiros (automático ou manual em caso de empate de critérios)
+- [x] 🟡 Classificação em tempo real ao lado (atualiza conforme palpites)
+- [x] 🟡 Serviço de cálculo: `calcular_classificacao_de_resultados` (reaproveitado do serviço de classificação real do Sprint 3) → classificados
+- [x] 🟡 Seleção dos 8 melhores terceiros — automático (pontos/saldo/gols/ranking FIFA/id); não há UI para desempate manual quando todos os critérios empatam (cai num fallback determinístico)
 
 ### S6.3 — Chaveamento Visual (Bracket)
-- [ ] 🟡 Componente `Chaveamento` (bracket tree)
-- [ ] 🟢 Visual de chave estilo mata-mata: oitavas → quartas → semi → final
-- [ ] 🟢 Cada confronto: logo/bandeira das seleções, placar, vencedor
-- [ ] 🟢 Destaque visual para o campeão (estrela, confete)
-- [ ] 🟡 Ao definir palpite em um jogo: vencedor avança automaticamente para próxima fase
-- [ ] 🟢 Toggle "Prorrogação" e "Pênaltis" em cada confronto de mata-mata
-- [ ] 🟢 Input de placar nos pênaltis (ex: 4 × 3)
-- [ ] 🟢 Chaveamento navegável em mobile (scroll horizontal)
+- [x] 🟡 Componente `Chaveamento` (colunas por rodada, scroll horizontal)
+- [x] 🟢 Visual de chave estilo mata-mata: oitavas → quartas → semi → final
+- [x] 🟢 Cada confronto: bandeira das seleções, placar, vencedor destacado
+- [x] 🟢 Destaque visual para o campeão (troféu + bandeira grande); sem animação de confete
+- [x] 🟡 Ao definir palpite em um jogo: vencedor avança automaticamente para próxima fase
+- [x] 🟢 Toggle "Prorrogação" e "Pênaltis" em cada confronto de mata-mata (pênaltis só aparecem quando o placar empata)
+- [x] 🟢 Input de placar nos pênaltis (ex: 4 × 3)
+- [x] 🟢 Chaveamento navegável em mobile (scroll horizontal)
 
 ### S6.4 — Gestão de Múltiplos Bolões
-- [ ] 🟡 Sidebar ou dropdown para alternar entre bolões
-- [ ] 🟢 Criar novo bolão: modal com nome personalizado
-- [ ] 🟢 Duplicar bolão existente
-- [ ] 🟡 Comparação: resultado do bolão vs. resultado real (quando disponível)
-- [ ] 🟢 Percentual de acertos ao lado de cada palpite
+- [x] 🟡 Dropdown para alternar entre bolões
+- [x] 🟢 Criar novo bolão com nome personalizado — formulário inline, não modal (consistente com o resto do app, que não usa modais)
+- [x] 🟢 Duplicar bolão existente (copia todos os palpites)
+- [ ] 🟡 Comparação: resultado do bolão vs. resultado real — não implementado; só faz sentido quando a Copa tiver jogos reais encerrados, o que ainda não é o caso
+- [ ] 🟢 Percentual de acertos ao lado de cada palpite — depende do item acima
 
 ### S6.5 — Progresso e Persistência
-- [ ] 🟡 Barra de progresso: "X de 48 palpites preenchidos"
-- [ ] 🟡 Auto-save a cada mudança de placar (debounce 800ms)
-- [ ] 🟢 Indicador "Salvo" / "Salvando..."
+- [x] 🟡 Barra de progresso: "X de 104 palpites preenchidos" (72 da fase de grupos + 32 do mata-mata — ver nota sobre "48 jogos" no README.md desde o Sprint 0)
+- [x] 🟡 Auto-save a cada mudança de placar (debounce 800ms por jogo/confronto)
+- [x] 🟢 Indicador "Salvo" / "Salvando..."
 
 ---
 
