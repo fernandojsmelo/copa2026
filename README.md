@@ -56,6 +56,17 @@ Migrations ficam em `backend/db/migrations/`, seeds em `backend/db/seeds/`.
 O projeto roda direto na máquina/servidor, sem Docker (decisão do Claude.md).
 Os arquivos de exemplo estão em [deploy/](deploy/).
 
+> **Vercel não é adequado para o backend.** Funções serverless do Vercel
+> rodam num sistema de arquivos somente leitura (fora de `/tmp`, que é
+> efêmero) — o backend consegue subir lá, mas qualquer rota que toque o
+> banco falha com `"unable to open database file"`, e nada gravado
+> persistiria entre execuções mesmo que abrisse. Para hospedar o backend de
+> verdade, use um servidor com disco persistente (VPS via `deploy/`, ou um
+> serviço como Render/Railway/Fly.io). `frontend/.env.production` e o
+> fallback de `CORS_ORIGINS` em `backend/app/config.py` já apontam para os
+> domínios Vercel atuais do frontend/backend — ajuste-os se esses domínios
+> mudarem ou quando o backend for para uma hospedagem definitiva.
+
 1. **Backend**: crie o venv e instale as dependências normalmente
    (`make install-backend`), copie `backend/.env.production.example` para
    `backend/.env` no servidor e ajuste `ADMIN_KEY` (gere uma chave forte, ex.
