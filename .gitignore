@@ -12,6 +12,9 @@ build/
 
 # Banco de dados
 backend/db/copa2026.db
+backend/db/copa2026.db-wal
+backend/db/copa2026.db-shm
+backend/db/backups/
 *.sqlite3
 
 # Variáveis de ambiente

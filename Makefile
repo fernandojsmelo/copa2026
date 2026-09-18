@@ -1,4 +1,4 @@
-.PHONY: install install-backend install-frontend db-init db-reset db-seed dev-backend dev-frontend
+.PHONY: install install-backend install-frontend db-init db-reset db-seed dev-backend dev-frontend backup-db build-frontend
 
 install: install-backend install-frontend
 
@@ -23,3 +23,9 @@ dev-backend:
 
 dev-frontend:
 	cd frontend && npm run dev
+
+backup-db:
+	cd backend && . .venv/bin/activate && python scripts/backup_db.py
+
+build-frontend:
+	cd frontend && npm run build
