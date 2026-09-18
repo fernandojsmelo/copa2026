@@ -1,0 +1,57 @@
+-- Seed 01: 48 seleções da Copa do Mundo FIFA 2026
+-- Pote é derivado da coluna da tabela de grupos do PRD.md (Cabeça de Chave = pote 1, Seleção 2 = pote 2, ...)
+-- NOTA: a tabela 'Grupos Completos' do PRD.md continha duas duplicidades de seleção
+-- (Colômbia nos grupos G e J; Croácia nos grupos C e L), incompatíveis com o schema
+-- (cada seleção pertence a um único grupo). As vagas conflitantes (J3 e L2), assim como
+-- as vagas de repescagem em aberto (F4 e H4), foram semeadas como placeholder 'A Definir'
+-- até a correção dos dados oficiais do sorteio.
+
+INSERT INTO selecoes (nome, nome_pt, codigo_iso, bandeira_emoji, confederacao, grupo, pote, eh_cabeca_chave, eh_sede, treinador, ranking_fifa) VALUES
+    ('Mexico', 'México', 'MX', '🇲🇽', 'CONCACAF', 'A', 1, 1, 1, NULL, NULL),
+    ('South Korea', 'Coreia do Sul', 'KR', '🇰🇷', 'AFC', 'A', 2, 0, 0, NULL, NULL),
+    ('Czech Republic', 'República Tcheca', 'CZ', '🇨🇿', 'UEFA', 'A', 3, 0, 0, NULL, NULL),
+    ('South Africa', 'África do Sul', 'ZA', '🇿🇦', 'CAF', 'A', 4, 0, 0, NULL, NULL),
+    ('Canada', 'Canadá', 'CA', '🇨🇦', 'CONCACAF', 'B', 1, 1, 1, NULL, NULL),
+    ('Bosnia and Herzegovina', 'Bósnia e Herzegovina', 'BA', '🇧🇦', 'UEFA', 'B', 2, 0, 0, NULL, NULL),
+    ('Qatar', 'Catar', 'QA', '🇶🇦', 'AFC', 'B', 3, 0, 0, NULL, NULL),
+    ('Switzerland', 'Suíça', 'CH', '🇨🇭', 'UEFA', 'B', 4, 0, 0, NULL, NULL),
+    ('Argentina', 'Argentina', 'AR', '🇦🇷', 'CONMEBOL', 'C', 1, 1, 0, NULL, NULL),
+    ('Croatia', 'Croácia', 'HR', '🇭🇷', 'UEFA', 'C', 2, 0, 0, NULL, NULL),
+    ('Morocco', 'Marrocos', 'MA', '🇲🇦', 'CAF', 'C', 3, 0, 0, NULL, NULL),
+    ('Ecuador', 'Equador', 'EC', '🇪🇨', 'CONMEBOL', 'C', 4, 0, 0, NULL, NULL),
+    ('United States', 'Estados Unidos', 'US', '🇺🇸', 'CONCACAF', 'D', 1, 1, 1, NULL, NULL),
+    ('Australia', 'Austrália', 'AU', '🇦🇺', 'AFC', 'D', 2, 0, 0, NULL, NULL),
+    ('Paraguay', 'Paraguai', 'PY', '🇵🇾', 'CONMEBOL', 'D', 3, 0, 0, NULL, NULL),
+    ('Turkey', 'Turquia', 'TR', '🇹🇷', 'UEFA', 'D', 4, 0, 0, NULL, NULL),
+    ('Germany', 'Alemanha', 'DE', '🇩🇪', 'UEFA', 'E', 1, 1, 0, NULL, NULL),
+    ('Japan', 'Japão', 'JP', '🇯🇵', 'AFC', 'E', 2, 0, 0, NULL, NULL),
+    ('Ivory Coast', 'Costa do Marfim', 'CI', '🇨🇮', 'CAF', 'E', 3, 0, 0, NULL, NULL),
+    ('Curacao', 'Curaçao', 'CW', '🇨🇼', 'CONCACAF', 'E', 4, 0, 0, NULL, NULL),
+    ('Netherlands', 'Holanda', 'NL', '🇳🇱', 'UEFA', 'F', 1, 1, 0, NULL, NULL),
+    ('Sweden', 'Suécia', 'SE', '🇸🇪', 'UEFA', 'F', 2, 0, 0, NULL, NULL),
+    ('Tunisia', 'Tunísia', 'TN', '🇹🇳', 'CAF', 'F', 3, 0, 0, NULL, NULL),
+    ('TBD', 'A Definir', 'TBD', '❓', 'TBD', 'F', 4, 0, 0, NULL, NULL),
+    ('Brazil', 'Brasil', 'BR', '🇧🇷', 'CONMEBOL', 'G', 1, 1, 0, NULL, NULL),
+    ('Nigeria', 'Nigéria', 'NG', '🇳🇬', 'CAF', 'G', 2, 0, 0, NULL, NULL),
+    ('Colombia', 'Colômbia', 'CO', '🇨🇴', 'CONMEBOL', 'G', 3, 0, 0, NULL, NULL),
+    ('Saudi Arabia', 'Arábia Saudita', 'SA', '🇸🇦', 'AFC', 'G', 4, 0, 0, NULL, NULL),
+    ('Spain', 'Espanha', 'ES', '🇪🇸', 'UEFA', 'H', 1, 1, 0, NULL, NULL),
+    ('Uruguay', 'Uruguai', 'UY', '🇺🇾', 'CONMEBOL', 'H', 2, 0, 0, NULL, NULL),
+    ('Cape Verde', 'Cabo Verde', 'CV', '🇨🇻', 'CAF', 'H', 3, 0, 0, NULL, NULL),
+    ('TBD', 'A Definir', 'TBD', '❓', 'TBD', 'H', 4, 0, 0, NULL, NULL),
+    ('France', 'França', 'FR', '🇫🇷', 'UEFA', 'I', 1, 1, 0, NULL, NULL),
+    ('Norway', 'Noruega', 'NO', '🇳🇴', 'UEFA', 'I', 2, 0, 0, NULL, NULL),
+    ('Senegal', 'Senegal', 'SN', '🇸🇳', 'CAF', 'I', 3, 0, 0, NULL, NULL),
+    ('Iraq', 'Iraque', 'IQ', '🇮🇶', 'AFC', 'I', 4, 0, 0, NULL, NULL),
+    ('Portugal', 'Portugal', 'PT', '🇵🇹', 'UEFA', 'J', 1, 1, 0, NULL, NULL),
+    ('DR Congo', 'Rep. Dem. Congo', 'CD', '🇨🇩', 'CAF', 'J', 2, 0, 0, NULL, NULL),
+    ('TBD', 'A Definir', 'TBD', '❓', 'TBD', 'J', 3, 0, 0, NULL, NULL),
+    ('Uzbekistan', 'Uzbequistão', 'UZ', '🇺🇿', 'AFC', 'J', 4, 0, 0, NULL, NULL),
+    ('Belgium', 'Bélgica', 'BE', '🇧🇪', 'UEFA', 'K', 1, 1, 0, NULL, NULL),
+    ('Iran', 'Irã', 'IR', '🇮🇷', 'AFC', 'K', 2, 0, 0, NULL, NULL),
+    ('Egypt', 'Egito', 'EG', '🇪🇬', 'CAF', 'K', 3, 0, 0, NULL, NULL),
+    ('New Zealand', 'Nova Zelândia', 'NZ', '🇳🇿', 'OFC', 'K', 4, 0, 0, NULL, NULL),
+    ('England', 'Inglaterra', 'GB-ENG', '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'UEFA', 'L', 1, 1, 0, NULL, NULL),
+    ('TBD', 'A Definir', 'TBD', '❓', 'TBD', 'L', 2, 0, 0, NULL, NULL),
+    ('Ghana', 'Gana', 'GH', '🇬🇭', 'CAF', 'L', 3, 0, 0, NULL, NULL),
+    ('Panama', 'Panamá', 'PA', '🇵🇦', 'CONCACAF', 'L', 4, 0, 0, NULL, NULL);
