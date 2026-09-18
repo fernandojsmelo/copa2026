@@ -172,25 +172,25 @@ Versão: 1.0 | Metodologia: Iterativa por Feature
 ## 🌍 SPRINT 4 — Elencos das Seleções (Estimativa: 3–4 dias)
 
 ### S4.1 — API de Seleções e Jogadores
-- [ ] 🟡 `GET /api/selecoes` — lista de todas as 48 seleções
-- [ ] 🟡 `GET /api/selecoes/:id` — dados da seleção
-- [ ] 🟡 `GET /api/selecoes/:id/jogadores` — elenco completo com filtro por posição
-- [ ] 🟡 `GET /api/selecoes/:id/jogos` — jogos da seleção na Copa
+- [x] 🟡 `GET /api/selecoes` — lista de todas as 48 seleções (perfil completo: confederação, treinador, ranking FIFA)
+- [x] 🟡 `GET /api/selecoes/:id` — dados da seleção
+- [x] 🟡 `GET /api/selecoes/:id/jogadores` — elenco completo com filtro por posição
+- [x] 🟡 `GET /api/selecoes/:id/jogos` — não é uma rota própria: `GET /api/jogos?selecao_id=:id` (Sprint 2) já cobre isso, evitando duplicar a query
 
 ### S4.2 — Página de Seleções
-- [ ] 🟡 Página `ElencoPage`
-- [ ] 🟢 Search bar para buscar seleção por nome
-- [ ] 🟢 Grid de seleções com bandeira e nome (filtro por grupo/confederação)
-- [ ] 🟡 Componente `PerfilSelecao`:
+- [x] 🟡 Página `ElencoPage`
+- [x] 🟢 Search bar para buscar seleção por nome
+- [x] 🟢 Grid de seleções com bandeira e nome (filtro por grupo/confederação)
+- [x] 🟡 Componente `PerfilSelecao`:
   - Banner com bandeira grande
   - Treinador, confederação, ranking FIFA
   - Grupo e pote
-  - Resultados na Copa (atualizado)
-- [ ] 🟡 Componente `TabelaElenco`:
+  - Resultados na Copa (atualizado) — jogos da seleção + posição atual no grupo
+- [x] 🟡 Componente `TabelaElenco`:
   - Colunas: #, Nome, Posição, Clube, Idade
   - Filtros por posição
   - Ícone de capitão
-- [ ] 🟢 Navegação entre seleções (anterior / próxima)
+- [x] 🟢 Navegação entre seleções (anterior / próxima)
 
 ---
 
